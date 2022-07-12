@@ -18,7 +18,7 @@ fetch('https://jsonplaceholder.typicode.com/posts?_limit=5').then(res=>res.json(
         let post_title = document.createElement('h1');
         let a = document.createElement('a');
         a.textContent =  post.title;
-        a.href = `post.html?userId=${post.id}`
+        a.href = `post.html?postId=${post.id}`
         post_title.append(a);
 
         let post_description = document.createElement('p');
@@ -27,7 +27,7 @@ fetch('https://jsonplaceholder.typicode.com/posts?_limit=5').then(res=>res.json(
         let comment_item = document.createElement('div')
 
         let post_link = document.createElement('a');
-        post_link.href = `./post.html?userId=${post.userId}`
+        post_link.href = `./post.html?postId=${post.userId}`
 
         let button = document.createElement('button')
 
