@@ -4,13 +4,15 @@ const results = param.get('search-input')
 
 let text = document.querySelector('.answer');
 
-let text_posts = document.createElement('div')
+let text_posts = document.createElement('div');
 let profileText = document.createElement('div');
+let albumsText = document.createElement('div');
 
-document.body.append(profileText,text_posts);
+document.body.append(profileText,text_posts,albumsText);
 
 profileText.innerHTML = `<h1>Users:</h1>`
 text_posts.innerHTML = `<h1>Posts:</h1>`
+albumsText.innerHTML =`<h1>Albums:</h1>`
 
 
 if(results == ''){}
@@ -46,6 +48,15 @@ else{
             text_posts.append(li);
         })
 })
+    fetch(`https://jsonplaceholder.typicode.com/albums?title_like=${results}`).then(res=>res.json()).then    (albums=>{
+    albums.map(album=>{
+        let li = document.createElement('li');
+        li.innerHTML = `<a href=./album.html?userId=${album.id}>${album.title}</a>`;
+        albumsText.append(li);
+    })
+})
+
+
 }
 
 
@@ -53,22 +64,6 @@ function profile(info){
     info.map(singleInfo=>{
         let li = document.createElement('li');
         li.innerHTML = `<a href=./user.html?userId=${singleInfo.id}>${singleInfo.name}</a>`;
-        profileText.append(li)
-//         name.innerHTML = `<div class="container">
-//         <div class="user-wrapper">
-//             <p>Name: <strong>${singleInfo.name}</strong></p>
-//             <p>Username: (<strong>${singleInfo.username}</strong>)</p>
-//             <p><strong>City:</strong>${singleInfo.address.city}</p>
-//             <p><strong>Street:</strong>${singleInfo.address.street}</p>
-//             <p><strong>House number:</strong>${singleInfo.address.suite}</p>
-//             <p><strong>Zipcode:</strong>${singleInfo.address.zipcode}</p>
-//             <p><a href="callto:${singleInfo.phone}"><strong>Number:${singleInfo.phone}</strong></a>
-//             <p><a href=https://www.google.com/maps/@${singleInfo.address.geo.lat},${singleInfo.address.geo.lng},14z><strong>Location</storng></a></p>
-//             <p><strong>Website: </strong>${singleInfo.website}</p>
-//             <p><strong>Company: </strong>${singleInfo.company.name}<p>
-//             <p><strong>${singleInfo.company.bs}</strong></p>
-//         </div>
-//     </div>
-// `                       
+        profileText.append(li)                     
     })                
 }
