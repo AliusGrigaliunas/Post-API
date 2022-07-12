@@ -60,6 +60,64 @@ else{
 }
 
 
+
+let searchPageForm = document.querySelector('#search-page-form');
+
+searchPageForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+
+  let searchInput = event.target.elements['search-input'].value;
+
+  fetch(`https://jsonplaceholder.typicode.com/users?username_like=${searchInput}`)
+    .then(res => res.json())
+    .then(users => {
+      if (users.length > 0) {
+        profileText.textContent = 'Users:'
+
+        users.map(user => {
+          let userItem = document.createElement('li');
+          userItem.innerHTML = `<a href="./user.html?user_id=${user.id}">${user.name}</a>`;
+
+          profileText.append(userItem);
+        })
+      } else {
+        fetch(`https://jsonplaceholder.typicode.com/users?name_like=${searchInput}`)
+          .then(res => res.json())
+          .then(usersByName => {
+            if (usersByName.length > 0) {
+                profileText.textContent = 'Users:'
+        
+              usersByName.map(user => {
+                let userItem = document.createElement('li');
+                userItem.innerHTML = `<a href="./user.html?user_id=${user.id}">${user.name}</a>`;
+        
+                usersList.append(userItem);
+              })
+            } else {
+              fetch(`https://jsonplaceholder.typicode.com/users?email_like=${searchInput}`)
+                .then(res => res.json())
+                .then(usersByEmail => {
+                  if (usersByEmail.length > 0) {
+                    usersListTitle.textContent = 'Users:'
+              
+                    usersByEmail.map(user => {
+                      let userItem = document.createElement('li');
+                      userItem.innerHTML = `<a href="./user.html?user_id=${user.id}">${user.name}</a>`;
+              
+                      usersList.append(userItem);
+                    })
+                  } else {
+                    usersListTitle.textContent = 'Users not found.'
+                  }
+                })
+            } 
+          })
+      }
+  })
+})
+
+
 function profile(info){
     info.map(singleInfo=>{
         let li = document.createElement('li');
