@@ -7,7 +7,7 @@ loading.textContent = 'Loading...'
 
 loadBox.append(loading);
 let posts_html_link = document.createElement('a');
-posts_html_link.href = 'posts.html?variable=0';
+posts_html_link.href = './posts.html?variable=0';
 posts_html_link.textContent = 'Kiti autoriaus įrašai'
 
 fetch('https://jsonplaceholder.typicode.com/posts?_limit=5').then(res=>res.json()).then(data=>{
@@ -27,7 +27,7 @@ fetch('https://jsonplaceholder.typicode.com/posts?_limit=5').then(res=>res.json(
         let comment_item = document.createElement('div')
 
         let post_link = document.createElement('a');
-        post_link.href = `post.html?userId=${post.userId}`
+        post_link.href = `./post.html?userId=${post.userId}`
 
         let button = document.createElement('button')
 
