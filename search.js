@@ -42,7 +42,7 @@ else{
     fetch(`https://jsonplaceholder.typicode.com/posts?title_like=${results}`).then(res=>res.json()).then(titles=>{
         titles.map(post=>{
             let li = document.createElement('li');
-            li.innerHTML = `<a href=post.html?userId=${post.id}>${post.title}</a>`;
+            li.innerHTML = `<a href=./post.html?userId=${post.id}>${post.title}</a>`;
             text_posts.append(li);
         })
 })
@@ -52,7 +52,7 @@ else{
 function profile(info){
     info.map(singleInfo=>{
         let li = document.createElement('li');
-        li.innerHTML = `<a href=user.html?userId=${singleInfo.id}>${singleInfo.name}</a>`;
+        li.innerHTML = `<a href=./user.html?userId=${singleInfo.id}>${singleInfo.name}</a>`;
         profileText.append(li)
 //         name.innerHTML = `<div class="container">
 //         <div class="user-wrapper">

@@ -65,6 +65,7 @@ postsWrapper.append(postsListTitle, postsList);
   // getUsersPosts()
 
   // postsList.style.display = 'none'
+  postsWrapper.setAttribute('display','none');
 
 
   fetch('https://jsonplaceholder.typicode.com/posts')

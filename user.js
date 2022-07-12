@@ -54,7 +54,7 @@ fetch(`https://jsonplaceholder.typicode.com/users/${userId}/albums`).then(res=>r
     album_item.prepend(albums_container_title);
     albums.map(album=>{
         albums_Name.innerHTML += `
-        <ul><li><a href="#">${album.title}
+        <ul><li><a href="./albums.html">${album.title}
 `
     })
 })
