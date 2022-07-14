@@ -28,4 +28,3 @@ function renderElements(data){
     DOMElement.innerHTML += data.information;
     container.append(DOMElement);
 }
-
