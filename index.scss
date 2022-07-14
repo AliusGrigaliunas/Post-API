@@ -1,0 +1,43 @@
+$maincolor: #b8c6aa;
+$secondcolor: #758572;
+$thirdcolor:#e2dcc2;
+$fourthcolor:#353530;
+$fifthcolor: #514e49;
+
+body{
+    background-color: $maincolor;
+}
+// ul{
+//     display: flex;
+//     list-style: none;
+//     justify-content: space-between;
+//     .navUlItem{
+//         width: 5rem;
+//         text-align: center;
+//     }
+// }
+.NavWrapper{
+    background-color: $secondcolor;
+    width: 75%;
+    height: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 auto;
+    .formItem{
+        display: flex;
+        justify-content: flex-end;
+        input{
+            border-radius: 2rem;
+        }
+    }
+    ul{
+        display: flex;
+        list-style: none;
+        justify-content: space-between;
+        .navUlItem{
+            width: 5rem;
+            text-align: center;
+        }
+    }
+}

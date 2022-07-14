@@ -1,0 +1,29 @@
+body {
+  background-color: #b8c6aa;
+}
+
+.NavWrapper {
+  background-color: #758572;
+  width: 75%;
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+.NavWrapper .formItem {
+  display: flex;
+  justify-content: flex-end;
+}
+.NavWrapper .formItem input {
+  border-radius: 2rem;
+}
+.NavWrapper ul {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+}
+.NavWrapper ul .navUlItem {
+  width: 5rem;
+  text-align: center;
+}/*# sourceMappingURL=index.css.map */
