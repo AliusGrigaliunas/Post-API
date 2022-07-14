@@ -14,17 +14,18 @@ function init(){
             album.photos.map(photo=>{
                 let photoData = {
                     element: 'a',
-                    information: `<img src='${photo.thumbnailUrl}'></img>`
+                    information: `<img src='${photo.thumbnailUrl}'></img>`,
+                    parentElement: container
                 }
-                renderElements(photoData)
+                renderListElements(photoData)
             })
         })
     })
 }
 init();
 
-function renderElements(data){
-    let DOMElement = document.createElement(data.element);
-    DOMElement.innerHTML += data.information;
-    container.append(DOMElement);
-}
+// function renderElements(data){
+//     let DOMElement = document.createElement(data.element);
+//     DOMElement.innerHTML += data.information;
+//     container.append(DOMElement);
+// }

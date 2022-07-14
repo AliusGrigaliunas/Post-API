@@ -12,20 +12,23 @@ function userPostList(){
             let titleData = {
                 element:'h1',
                 information:   `<a href=post.html?postId=${post.id}>${post.title}</a>`,
+                parentElement: div
             }
-            renderElements(titleData)
+            renderListElements(titleData)
 
             let descriptionData ={
                 element: 'p',
-                information: post.body
+                information: post.body,
+                parentElement: div
             }
-            renderElements(descriptionData);
+            renderListElements(descriptionData);
 
             let userData = {
                 element: 'p',
-                information: `<a href=./user.html?userId=${post.userId}>${post.user.name}</a>`
+                information: `<a href=./user.html?userId=${post.userId}>${post.user.name}</a>`,
+                parentElement: div
             }
-            renderElements(userData)
+            renderListElements(userData)
 
             let comment_item = document.createElement('div')
             post.comments.map(comment=>{
@@ -76,12 +79,6 @@ function albumList(){
         })
     })
 }
-function renderElements(data){
-    let DOMElement = document.createElement(data.element);
-    DOMElement.innerHTML = data.information;
-    div.append(DOMElement);
-}
-
 init();
 
 

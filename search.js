@@ -187,11 +187,6 @@ function renderAllAlbums(albumData){
         }
 })
 }
-function renderListElement(data){
-    let li = document.createElement('li');
-    li.innerHTML = `<a href=./${data.href}>${data.content}</a>`;
-    data.parentElement.append(li);
-}
 
 outerInput();
 innerInput();
