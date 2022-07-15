@@ -9,3 +9,8 @@ function renderListElement(data){
     li.innerHTML = `<a href=./${data.href}>${data.content}</a>`;
     data.parentElement.append(li);
 }
+
+function firstLetterCapitilize(str){
+    return str[0].toUpperCase() + str.slice(1);
+}
+

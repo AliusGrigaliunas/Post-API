@@ -23,9 +23,10 @@ function getUsersPosts(id){
   .then(user => {
         postsListTitle.textContent = `Posts of ${user.name}:`;
         user.posts.map(post => {
+          let title = firstLetterCapitilize(post.title)
           let postData = {
             element: 'li',
-            information: `<a href="./post.html?postId=${post.id}">${post.title}</a>`,
+            information: `<a href="./post.html?postId=${post.id}">${title}</a>`,
             parentElement: postsList
           }
           renderListElements(postData)
@@ -38,9 +39,10 @@ function renderAllPost(){
   .then(posts => {
     postsListTitle.textContent = 'All Posts:';
     posts.map(post => {
+        let title = firstLetterCapitilize(post.title)
           let postData = {
             element: 'li',
-            information: `<a href="./post.html?postId=${post.id}">${post.title} (${post.user.name})</a>`,
+            information: `<a href="./post.html?postId=${post.id}">${title} (${post.user.name})</a>`,
             parentElement: postsList
           }
           renderListElements(postData)

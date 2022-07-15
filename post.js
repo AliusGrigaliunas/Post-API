@@ -10,8 +10,10 @@ fetch(`https://jsonplaceholder.typicode.com/posts/${userId}`).then(res=>res.json
         let div = document.createElement('div');
         div.setAttribute('style','border:1px solid black');
 
+        let title = firstLetterCapitilize(post.title);
+
         let post_title = document.createElement('h1');
-        post_title.textContent =  post.title;
+        post_title.textContent =  title;
 
 
         let post_description = document.createElement('p');

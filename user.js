@@ -37,8 +37,9 @@ fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`).then(res=>re
 
     post_handler.append(post_container_name)
     posts.map(post=>{
+        let title = firstLetterCapitilize(post.title)
         post_handler.innerHTML += `
-                    <h2><a href=".">${post.title}</a></h2>
+                    <h2><a href="post.html?postId=${post.id}">${title}</a></h2>
                     <p>${post.body}</p>
              
         `

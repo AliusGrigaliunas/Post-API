@@ -9,9 +9,10 @@ function init(){
 function userPostList(){
     fetch('https://jsonplaceholder.typicode.com/posts?_limit=2&_expand=user&_embed=comments').then(res=>res.json()).then(data=>{
         data.map((post)=>{
+            let title = firstLetterCapitilize(post.title)
             let titleData = {
                 element:'h1',
-                information:   `<a href=post.html?postId=${post.id}>${post.title}</a>`,
+                information:   `<a href=post.html?postId=${post.id}>${title}</a>`,
                 parentElement: div
             }
             renderListElements(titleData)
