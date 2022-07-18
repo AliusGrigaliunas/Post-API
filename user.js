@@ -1,3 +1,5 @@
+import {firstLetterCapitilize} from './functions.js'
+
 let nam = document.querySelector('.full-name');
 let nickname = document.querySelector('.nick-name');
 let email = document.querySelector('.email');

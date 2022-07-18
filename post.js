@@ -1,3 +1,5 @@
+import {firstLetterCapitilize} from './functions.js'
+
 let queryParams = document.location.search;
 let urlParams = new URLSearchParams(queryParams);
 let userId = urlParams.get('postId')

@@ -1,4 +1,5 @@
-let navigationItems = [
+export function renderHeader(){
+  let navigationItems = [
     {
       title: 'Home',
       path: 'index.html',
@@ -66,3 +67,5 @@ let navigationItems = [
   }
 
   document.body.prepend(header);
+}
+

@@ -1,4 +1,5 @@
-
+import {firstLetterCapitilize,renderListElements} from './functions.js'
+import {renderHeader} from './header.js'
 
 function init(){
     let queryParams = document.location.search;
@@ -23,8 +24,10 @@ function albumList(){
 
     fetch('https://jsonplaceholder.typicode.com/albums?_limit=20&_embed=photos&_expand=user').then(res => res.json()).then(albums=>{
         albums.map(album=>{
+
+            let title = firstLetterCapitilize(album.title)
             albumContainer.innerHTML += `
-                                        <h2><a href=album.html?userId=${album.userId}&albumId=${album.id}>${album.title}</a></h2>
+                                        <h2><a href=album.html?userId=${album.userId}&albumId=${album.id}>${title}</a></h2>
                                         <p>Album author:<a href=user.html?userId=${album.userId}>${album.user.name}</a></p>
                                         <img src="${album.photos[0].thumbnailUrl}">`
         })
@@ -54,3 +57,4 @@ function renderSinlgeAlbum(){
 }
 
 init();
+renderHeader();
