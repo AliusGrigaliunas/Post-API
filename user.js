@@ -13,6 +13,7 @@ let urlParams = new URLSearchParams(queryParams);
 let userId = urlParams.get('userId')
 
 fetch(`https://jsonplaceholder.typicode.com/users/${userId}`).then(res=>res.json()).then(user=>{
+    console.log(user);
     nam.textContent = user.name;
     nickname.innerHTML = `Username: (<strong>${user.username}</strong>)`
     email.innerHTML = `Email: <a href="mailto:${user.email}">${user.email}</a>`
