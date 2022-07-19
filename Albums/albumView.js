@@ -21,9 +21,7 @@ async function AlbumsList(data){
             albumContainer.innerHTML += `
             <h2><a href=album.html?userId=${album.userId}&albumId=${album.id}>${title}</a></h2>
             ${createdBy}
-            <img src="${album.photos[0].thumbnailUrl}">
-            `
+            <img src="${album.photos[0].thumbnailUrl}">`
         })
 }
-
 export {AlbumsList};
