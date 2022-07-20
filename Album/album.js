@@ -1,4 +1,3 @@
-import { firstLetterCapitilize,renderListElements} from "../functions.js";
 import {getphotosbyalbumId} from './albumController.js'
 import {albumView} from './albumview.js'
 async function init(){
