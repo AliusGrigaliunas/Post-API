@@ -1,5 +1,5 @@
-import {renderListElements,firstLetterCapitilize} from './functions.js';
-import {renderHeader} from './header.js'
+import {renderListElements,firstLetterCapitilize} from '../functions.js';
+import {renderHeader} from '../header.js'
 let postsWrapper = document.querySelector('#posts-wrapper');
 let postsListTitle = document.createElement('h2');
 let postsList = document.createElement('ul');
