@@ -14,8 +14,19 @@ function firstLetterCapitilize(str){
     return str[0].toUpperCase() + str.slice(1);
 }
 
+function renderOptionElement(data){
+    let {name,value,parentElement} = data;
+    
+    let optionElement = document.createElement('option');
+    optionElement.textContent = name;
+    optionElement.value = value;
+
+    parentElement.append(optionElement);
+}
+
 export {
     renderListElement,
     renderListElements,
-    firstLetterCapitilize
+    firstLetterCapitilize,
+    renderOptionElement
 }
