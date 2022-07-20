@@ -11,7 +11,7 @@ function viewPost(posts){
         div.setAttribute('style','border:1px solid black');
 
         div.innerHTML = `
-        <h1>${title}</h1>
+        <h1>${title}</h1><a href=./editPosts.html?postId=${post.id}>Rewrite History young one</a>
         <p>${post.body}</p>
         <a href="./user.html?userId=${post.userId}">${post.user.name}</a>`
 
