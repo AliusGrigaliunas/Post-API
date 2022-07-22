@@ -10,4 +10,12 @@ async function getNewUserData(newUser) {
     return createdUser;
 }
 
-export {getNewUserData}
+async function allUsersData(){
+    let res = await fetch('https://jsonplaceholder.typicode.com/users');
+    let users = await res.json();
+    return users;
+}
+
+
+
+export {getNewUserData,allUsersData}
