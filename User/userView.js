@@ -14,7 +14,9 @@ export function createUserProfile(user,posts,albums){
         <p><a href=https://www.google.com/maps/@${user.address.geo.lat},${user.address.geo.lng},14z><strong>Locstorng></a></p>
         <p><strong>Website: </strong>${user.website}</p>
         <p><strong>Company: </strong>${user.company.name}<p>
-        <p><strong>${user.company.bs}</strong></p>`
+        <p><strong>Companies saying: ${user.company.bs}</strong></p>
+        <button onclick="window.location='../editUser.html?userId=${user.id}'">Edit User</button>
+        `
    
     let postsContainer = document.querySelector('.posts')
     renderListElements({
