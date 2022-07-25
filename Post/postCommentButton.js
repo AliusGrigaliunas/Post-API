@@ -1,35 +1,76 @@
+import {renderSingleComment} from '../functions.js'
+import {comment} from './postController.js'
+import {editCommentButton} from './editCommentsButton.js'
+import {showComment} from './showNotShowComments.js'
+
+
 function commentButton(post,div){
 
-        let button = document.createElement('p')
+        let comment_wrapper = document.createElement('div');
 
-        let comment_item = document.createElement('div')
         post.comments.map(comment=>{
-            comment_item.innerHTML += ` 
-            <div class="comment-item">
-            <fieldset>
-            <legend>Comment</legend>
-            <h3>${comment.name}</h3>
-            <span>Comment made by: ${comment.email}</span>
-            <p>${comment.body}</p>
-            </fieldset>
-            </div class="comment-item">
-            `                          
+            let comment_item = renderSingleComment(comment);
+
+            editCommentButton(comment_item,comment);
+            
+            comment_wrapper.append(comment_item);
         })
         
-        comment_item.style.display = 'none';
-        button.innerHTML = `<button>Show hell</button>`
+        showComment(comment_wrapper,div);
 
-        button.addEventListener('click',(event)=>{
+        let postComment = document.createElement('button');
+        postComment.textContent = 'Post comment'
+
+        postComment.addEventListener('click',event=>{
             event.preventDefault();
-            if(comment_item.style.display == 'none'){
-                comment_item.style.display = 'block';
-                button.innerHTML = `<button>Show Heaven</button>`;
-            }else {
-                comment_item.style.display = 'none';
-                button.innerHTML = `<button>Show hell</button>`;
+            postComment.hidden = true
+
+            let createComment = document.createElement('div');
+            createComment.classList.add('error');
+
+            if( document.querySelector('.error')){
+                document.querySelector('.error').remove()
             }
+            let form = document.createElement('form');
+            form.classList.add('createComment')
+
+            form.innerHTML =`
+                    <div class ='title'>
+                        <label for="title">Title</label>
+                        <input name="title">
+                    </div>
+                    <div class ='madeBy'>
+                        <label for="madeBy">Made By</label>
+                        <input name="madeBy">
+                    </div>
+                    <div class ='body'>
+                        <label for="body">Body</label>
+                        <input name="body">
+                    </div>
+                    <input type="submit" value="Comment">
+            `
+
+            form.addEventListener('submit',async event=>{
+                event.preventDefault();
+
+                let newData = await comment({
+                    name: form.elements.title.value,
+                    email: form.elements.madeBy.value,
+                    body:form.elements.body.value
+                })
+
+                let {name,email,body} = newData;
+
+                let newComment = renderSingleComment(newData);
+                div.append(newComment)
+
+            })
+
+            createComment.append(form);
+            div.append(createComment)
         })
 
-        div.append(button,comment_item)
+
+        div.append(comment_wrapper,postComment)
 }
 export {commentButton}

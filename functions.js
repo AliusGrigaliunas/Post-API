@@ -32,10 +32,27 @@ function getParamData(data){
     return userId;
 }
 
+function renderSingleComment(data){
+    let {name,email,body} = data;
+    let comment_item = document.createElement('div')
+            comment_item.innerHTML += ` 
+            <div class="comment-item">
+            <fieldset>
+            <legend>Comment</legend>
+            <h3>${name}</h3>
+            <span>Comment made by: ${email}</span>
+            <p>${body}</p>
+            </fieldset>
+            </div>
+            `
+    return comment_item;
+}
+
 export {
     renderListElement,
     renderListElements,
     firstLetterCapitilize,
     renderOptionElement,
-    getParamData
+    getParamData,
+    renderSingleComment
 }
