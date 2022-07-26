@@ -1,5 +1,5 @@
-import {getPostByUserId,getAllPosts} from './postsCollector.js'
-import {firstLetterCapitilize,renderListElements} from '../functions.js'
+import {getPostByUserId,getAllPosts,getPostsByPages} from './postsCollector.js'
+import {firstLetterCapitilize,getParamData,renderListElements} from '../functions.js'
 let postsWrapper = document.querySelector('#posts-wrapper');
 let postsListTitle = document.createElement('h2');
 let postsList = document.createElement('ul');
@@ -22,7 +22,22 @@ async function getUsersPosts(id){
 }
 
 async function renderAllPost(){
-    let posts = await getAllPosts();
+    let data = await getAllPosts();
+    let postsTotalNumber = data.length;
+    let pagesNumber = postsTotalNumber/25;
+
+    for(let i=1;pagesNumber>=i;i++){
+      let createPage = document.createElement('a');
+
+      createPage.href = `posts.html?number=${i}`;
+      createPage.text = `${i}`;
+
+      postsWrapper.append(createPage);  
+  }
+
+  let info = getParamData('number')
+  let posts = await getPostsByPages(info);
+
     postsListTitle.textContent = 'All Posts:';
     posts.map(post => {
         let title = firstLetterCapitilize(post.title)

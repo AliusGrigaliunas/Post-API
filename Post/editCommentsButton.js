@@ -1,14 +1,16 @@
 import { commentPatchMethod } from "./postController.js";
 import {getParamData} from '../functions.js'
+
 export async function editCommentButton(comment_item,comment){
-    
+
     let postId = getParamData('postId');
 
     let editButton = document.createElement('button');
     editButton.classList.add('editButtons');
     editButton.textContent = 'Edit';
 
-    editButton.addEventListener('click',()=>{
+    editButton.addEventListener('click',(event)=>{
+        event.preventDefault();
         let editCommentForm = document.createElement('form');
 
         editCommentForm.innerHTML=`
@@ -18,8 +20,7 @@ export async function editCommentButton(comment_item,comment){
         <input name="email"}>
         <label for="body">Body</label>
         <input name="body">
-        <input type="submit" value="Sumbit Edit">
-        `;
+        <input type="submit" value="Sumbit Edit">`;
 
         let {name,email,body} = comment;
         
@@ -32,14 +33,14 @@ export async function editCommentButton(comment_item,comment){
             let newName = editCommentForm.elements.name.value;
             let newEmail = editCommentForm.elements.email.value;
             let newBody = editCommentForm.elements.body.value;
+
             let editedComment = await commentPatchMethod(postId,{
                 name: newName,
                 email: newEmail,
                 body:newBody
             })
-            let {name,email,body} = editedComment;
-
             comment = editedComment
+            let {name,email,body} = editedComment;
 
             comment_item.innerHTML = ` 
             <div class="comment-item">
@@ -51,7 +52,9 @@ export async function editCommentButton(comment_item,comment){
             </fieldset>
             </div>
             `
+
             comment_item.append(editButton)
+            event.target.reset();
         })
 
         comment_item.append(editCommentForm)

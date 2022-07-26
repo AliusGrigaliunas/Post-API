@@ -43,8 +43,7 @@ function renderSingleComment(data){
             <span>Comment made by: ${email}</span>
             <p>${body}</p>
             </fieldset>
-            </div>
-            `
+            </div>`
     return comment_item;
 }
 
