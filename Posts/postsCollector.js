@@ -8,8 +8,8 @@ async function getAllPosts(){
     let allPosts = await res.json();
     return allPosts;
 }
-async function getPostsByPages(id){
-    let res = await fetch(`https://jsonplaceholder.typicode.com/posts?_expand=user&_page=${id}&_limit=25`);
+async function getPostsByPages(id,limit){
+    let res = await fetch(`https://jsonplaceholder.typicode.com/posts?_expand=user&_page=${id}&_limit=${limit}`);
     let allPosts = await res.json();
     return allPosts;
 }

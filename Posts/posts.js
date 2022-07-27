@@ -8,6 +8,7 @@ async function init(){
   if (userId) {
     getUsersPosts(userId)
   }else{
+    
     renderAllPost()
   }
 }

@@ -66,7 +66,6 @@ async function init(){
             checkIfUserExsits = true
         }
       })
-      console.log(checkIfUserExsits);
       let newUsercreated = await getNewUserData(newUser);
       createUser(newUsercreated,event.target,checkIfUserExsits)
 
