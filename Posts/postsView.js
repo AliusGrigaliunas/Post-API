@@ -1,11 +1,11 @@
-import {getPostByUserId,getAllPosts,getPostsByPages} from './postsCollector.js'
-import {firstLetterCapitilize,getParamData,renderListElements} from '../functions.js'
+import {getAllPosts,getPostsByPages} from './postsCollector.js'
+import {firstLetterCapitilize,renderListElements} from '../functions.js'
 import {paginationById,paginationForAll} from '../pages.js'
 
 let postsWrapper = document.querySelector('#posts-wrapper');
 let postsListTitle = document.createElement('h2');
 let postsList = document.createElement('ul');
-let paginationWrapper = document.createElement('div');
+export let paginationWrapper = document.createElement('div');
 let paginationSelector = document.querySelector('#select');
 
 postsWrapper.append(postsListTitle, postsList,paginationWrapper);
@@ -44,13 +44,14 @@ paginationSelector.addEventListener('change',()=>{
 
 async function renderAllPost(){
     let data = await getAllPosts();
-    let info = paginationForAll({
+    let info = await paginationForAll({
       data,
       paginationWrapper,
       name:'posts.html',
       limitNumber: 25
     });
     let {currrentPage,limit} = info;
+    console.log(info);
     let posts = await getPostsByPages(currrentPage,limit)
     
     postsListTitle.textContent = 'All Posts:';
@@ -67,5 +68,5 @@ async function renderAllPost(){
 
 export{
     getUsersPosts,
-    renderAllPost
+    renderAllPost,
 }

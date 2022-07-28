@@ -1,13 +1,26 @@
 import {renderHeader} from '../header.js'
+import { paginationForAll} from '../pages.js';
 import {getUsers,usersPagination} from './usersController.js'
 import {createUsersList} from './usersView.js'
-
+import {selectMaker} from '../selector.js'
 
 async function init(){
     renderHeader();
-    let paginationShow = await usersPagination(1,5);
-    console.log(paginationShow);
-    let users = await getUsers();
+    let data = await getUsers();
+    let paginationWrapper = document.createElement('div');
+    let info = await paginationForAll({
+        data,
+        paginationWrapper,
+        name:'users.html',
+        limitNumber:5
+    })
+    console.log(info);
+    document.body.append(paginationWrapper)
+    let {currrentPage,limit} = info;
+
+    let users = await usersPagination(currrentPage,limit);
+
+    selectMaker([1,2,5],'users.html')
     createUsersList(users);
 }
 

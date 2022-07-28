@@ -82,6 +82,8 @@ async function paginationForAll(obj){
 
     getParamData('limit') ? limit =  getParamData('limit'): limit = limitNumber;
 
+  console.log(limit);
+
     let currrentPage = getParamData('page');
     let pagesNumber = postsTotalNumber/limit;
 
@@ -140,10 +142,7 @@ async function paginationForAll(obj){
     paginationWrapper.append(createPage,backwardPage,lastPage);  
 
 }
-// }else{
-//   paginationWrapper.remove();
-// }
-console.log(currrentPage);
+
 return {limit,currrentPage};
 }
 

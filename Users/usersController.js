@@ -5,6 +5,7 @@ async function getUsers(){
 }
 
 async function usersPagination(currentPage,limit){
+    console.log(currentPage);
     let res = await fetch(`https://jsonplaceholder.typicode.com/users?_embed=posts&_page=${currentPage}&_limit=${limit}`)
     let users = await res.json();
     return users;
