@@ -1,17 +1,29 @@
 import {getPostByUserId,getAllPosts,getPostsByPages} from './postsCollector.js'
 import {firstLetterCapitilize,getParamData,renderListElements} from '../functions.js'
+import {paginationById,paginationForAll} from '../pages.js'
+
 let postsWrapper = document.querySelector('#posts-wrapper');
 let postsListTitle = document.createElement('h2');
 let postsList = document.createElement('ul');
-let paginationWrapper = document.createElement('div')
-let paginationSelector = document.querySelector('#select')
+let paginationWrapper = document.createElement('div');
+let paginationSelector = document.querySelector('#select');
+
 postsWrapper.append(postsListTitle, postsList,paginationWrapper);
+
+for(let i = 1;i<=5;i++){
+  let select = document.createElement('option');
+  select.textContent = i * 2;
+  paginationSelector.append(select)
+}
 
 
 async function getUsersPosts(id){
-    let user = await getPostByUserId(id);
-        postsListTitle.textContent = `Posts of ${user.name}:`;
-        user.posts.map(post => {
+
+ let user = await paginationById(id,paginationWrapper)
+
+        postsListTitle.textContent = `Posts of ${user[0].user.name}:`;
+        user.map(post => {
+          console.log(post);
           let title = firstLetterCapitilize(post.title)
           let postData = {
             element: 'li',
@@ -32,74 +44,15 @@ paginationSelector.addEventListener('change',()=>{
 
 async function renderAllPost(){
     let data = await getAllPosts();
-    let postsTotalNumber = data.length;
-
-    let limit;
-
-    getParamData('limit') ? limit =  getParamData('limit'): limit = 25;
-
-    let currrentPage = getParamData('page');
-    let pagesNumber = postsTotalNumber/limit;
+    let info = paginationForAll({
+      data,
+      paginationWrapper,
+      name:'posts.html',
+      limitNumber: 25
+    });
+    let {currrentPage,limit} = info;
+    let posts = await getPostsByPages(currrentPage,limit)
     
-    let posts = await getPostsByPages(currrentPage,limit);
-
-if(limit <= 25){
-  let firstPage = ''
-  
-
-  if(Number(currrentPage) !== 1){
-    firstPage = document.createElement('a');
-    firstPage.href = `posts.html?page=1`;
-    firstPage.textContent = 'First';
-  }
-
-  let lastPage = ''
-
-  if(Number(currrentPage) !== pagesNumber){
-    lastPage = document.createElement('a');
-    lastPage.textContent = 'Last'
-    lastPage.href = `posts.html?page=${pagesNumber}&?limit=${limit}`
-  }
-
-  let backwardPage;
-  let forwardPage;
-  if(currrentPage == pagesNumber){
-    forwardPage = document.createElement('span');
-  }else{
-    forwardPage = document.createElement('a');
-    forwardPage.textContent = 'Next';
-    forwardPage.href = `posts.html?page=${Number(currrentPage)+1}&limit=${limit}`
-  }
-  if(currrentPage >= pagesNumber){
-    backwardPage = document.createElement('span')
-  }else{
-    backwardPage = document.createElement('a');
-    backwardPage.textContent = 'Prev';
-    backwardPage.href = `posts.html?page=${Number(currrentPage)-1}&limit=${limit}`
-  }
-
-  paginationWrapper.append(firstPage,forwardPage)
-
-  for(let i=1;pagesNumber>=i;i++){
-
-    let createPage;
-
-    if(currrentPage == i){
-      createPage = document.createElement('span')
-    }
-    else{
-      createPage = document.createElement('a');
-      createPage.classList.add('page');
-      createPage.href = `posts.html?page=${i}&limit=${limit}`;
-    }
-
-    createPage.textContent = `${i}`;
-
-    paginationWrapper.append(createPage,backwardPage,lastPage);  
-}
-}else{
-  paginationWrapper.remove();
-}
     postsListTitle.textContent = 'All Posts:';
     posts.map(post => {
         let title = firstLetterCapitilize(post.title)

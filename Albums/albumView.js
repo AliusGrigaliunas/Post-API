@@ -1,4 +1,5 @@
 import {firstLetterCapitilize} from '../functions.js'
+
 async function AlbumsList(data){
     let {albumsData, wrapperSelector,allAlbums} = data;
 
@@ -12,6 +13,7 @@ async function AlbumsList(data){
     }
 
         albumsData.map(album=>{
+
             let createdBy = '';
 
             if(allAlbums){

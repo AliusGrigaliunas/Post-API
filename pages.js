@@ -1,28 +1,153 @@
-// import {getAllPosts} from './Posts/postsCollector.js'
+import { getParamData } from "./functions.js";
+import {getPostByUserId} from './Posts/postsCollector.js'
+async function paginationById(id,paginationWrapper){
+    let data = await getPostByUserId(id,10);
+    let postsTotalNumber = data.length;
 
-// async function init(){
-//         let res = await fetch('https://jsonplaceholder.typicode.com/posts?_expand=user');
-//         let allPosts = await res.json();
+    let limit;
 
-//         let postsWrapper = document.querySelector('#posts-wrapper')
+    getParamData('limit') ? limit =  getParamData('limit'): limit = 5;
 
-//         let postsTotalNumber = allPosts.length;
+    let currrentPage = getParamData('page');
+    let pagesNumber = postsTotalNumber/limit;
+    
+    let user = await getPostByUserId(id,limit,currrentPage);
 
-//         let pagesNumber = postsTotalNumber/25;
+if(limit <= 9){
+  let firstPage = ''
+  
 
-//         for(let i=1;pagesNumber>=i;i++){
+  if(Number(currrentPage) !== 1){
+    firstPage = document.createElement('a');
+    firstPage.href = `posts.html?userId=${id}&page=1&limit=${limit}`;
+    firstPage.textContent = 'First';
+  }
 
-//             let page = await getAllPosts(i);
+  let lastPage = ''
 
-//             let createPage = document.createElement('a');
+  if(Number(currrentPage) !== pagesNumber){
+    lastPage = document.createElement('a');
+    lastPage.textContent = 'Last'
+    lastPage.href = `posts.html?userId=${id}&page=${pagesNumber}&limit=${limit}`
+  }
 
-//             createPage.href = `${page}`;
-//             createPage.text = `${i}`;
+  let backwardPage;
+  let forwardPage;
+  if(currrentPage == pagesNumber){
+    forwardPage = document.createElement('span');
+  }else{
+    forwardPage = document.createElement('a');
+    forwardPage.textContent = 'Next';
+    forwardPage.href = `posts.html?userId=${id}&page=${Number(currrentPage)+1}&limit=${limit}`
+  }
+  if(currrentPage < pagesNumber){
+    backwardPage = document.createElement('span')
+  }else{
+    backwardPage = document.createElement('a');
+    backwardPage.textContent = 'Prev';
+    backwardPage.href = `posts.html?userId=${id}&page=${Number(currrentPage)-1}&limit=${limit}`
+  }
 
-//             postsWrapper.append(createPage);  
-//         }
-//         console.log(allPosts.length);
+  paginationWrapper.append(firstPage,forwardPage)
 
+  for(let i=1;pagesNumber>=i;i++){
+
+    let createPage;
+
+    if(currrentPage == i){
+      createPage = document.createElement('span')
+    }
+    else{
+      createPage = document.createElement('a');
+      createPage.classList.add('page');
+      createPage.href = `posts.html?userId=${id}&page=${i}&limit=${limit}`;
+    }
+
+    createPage.textContent = `${i}`;
+
+    paginationWrapper.append(createPage,backwardPage,lastPage);  
+}
+}else{
+  paginationWrapper.remove();
+}
+
+return user;
+
+}
+async function paginationForAll(obj){
+    let {data,paginationWrapper,name,limitNumber} = obj
+    let postsTotalNumber = data.length;
+
+    let limit;
+
+    getParamData('limit') ? limit =  getParamData('limit'): limit = limitNumber;
+
+    let currrentPage = getParamData('page');
+    let pagesNumber = postsTotalNumber/limit;
+
+
+  let firstPage = ''
+  
+
+  if(Number(currrentPage) !== 1){
+    firstPage = document.createElement('a');
+    firstPage.href = `${name}?page=1`;
+    firstPage.textContent = 'First';
+  }
+
+  let lastPage = ''
+
+  if(Number(currrentPage) !== pagesNumber){
+    lastPage = document.createElement('a');
+    lastPage.textContent = 'Last'
+    lastPage.href = `${name}?page=${pagesNumber}&?limit=${limit}`
+  }
+
+  let backwardPage;
+  let forwardPage;
+  if(currrentPage == pagesNumber){
+    forwardPage = document.createElement('span');
+  }else{
+    forwardPage = document.createElement('a');
+    forwardPage.textContent = 'Next';
+    forwardPage.href = `${name}?page=${Number(currrentPage)+1}&limit=${limit}`
+  }
+  if(currrentPage >= pagesNumber){
+    backwardPage = document.createElement('span')
+  }else{
+    backwardPage = document.createElement('a');
+    backwardPage.textContent = 'Prev';
+    backwardPage.href = `${name}?page=${Number(currrentPage)-1}&limit=${limit}`
+  }
+
+  paginationWrapper.append(firstPage,forwardPage)
+
+  for(let i=1;pagesNumber>=i;i++){
+
+    let createPage;
+
+    if(currrentPage == i){
+      createPage = document.createElement('span')
+    }
+    else{
+      createPage = document.createElement('a');
+      createPage.classList.add('page');
+      createPage.href = `${name}?page=${i}&limit=${limit}`;
+    }
+
+    createPage.textContent = `${i}`;
+
+    paginationWrapper.append(createPage,backwardPage,lastPage);  
+
+}
+// }else{
+//   paginationWrapper.remove();
 // }
+console.log(currrentPage);
+return {limit,currrentPage};
+}
 
-// init();
+export {
+    paginationById,
+    paginationForAll
+}

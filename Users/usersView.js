@@ -18,5 +18,4 @@ export function createUsersList(users){
             }
             renderListElement(userData)
         })
-
 }

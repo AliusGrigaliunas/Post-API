@@ -51,6 +51,7 @@ export default function indexPostViewer(posts) {
         let button = document.createElement('button')
         
         button.textContent = 'Show Heaven'
+        comment_item.style.display  = 'none'
         
         button.addEventListener('click',(event)=>{
             event.preventDefault();

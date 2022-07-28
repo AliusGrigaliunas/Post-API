@@ -1,5 +1,5 @@
-async function getPostByUserId(id){
-    let res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}?_embed=posts`);
+async function getPostByUserId(id,limit,page){
+    let res = await fetch(`https://jsonplaceholder.typicode.com/posts?_expand=user&_limit=${limit}&userId=${id}&_page=${page}`);
     let usersPosts = await res.json();
     return usersPosts;
 }

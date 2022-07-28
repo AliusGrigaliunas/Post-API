@@ -1,5 +1,5 @@
 async function allAlbums(){
-    let res = await fetch('https://jsonplaceholder.typicode.com/albums?_limit=20&_embed=photos&_expand=user')
+    let res = await fetch('https://jsonplaceholder.typicode.com/albums?_embed=photos&_expand=user')
     let albums = await res.json();
     return albums;
 }
@@ -10,7 +10,15 @@ async function allUserAlbums(id){
 }
 
 
+async function allUserAlbumsPagination(currentPage,limit){
+    console.log(currentPage,limit);
+    let res = await fetch(`https://jsonplaceholder.typicode.com/albums?_expand=user&_embed=photos&_page=${currentPage}&_limit=${limit}`);
+    let albums = await res.json();
+    return albums;
+}
+
 export {
     allAlbums,
-    allUserAlbums
+    allUserAlbums,
+    allUserAlbumsPagination
 }
