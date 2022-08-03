@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreateUser</title>
+</head>
+<body>
+    <script type="module" src="./CreateUser/createUser.js"></script>
+    <form id="create-user-form">
+        <div class="form-control">
+          <label for="post-title">Name:</label>
+          <input type="text" name="name" id="nameUser">
+        </div>
+    
+        <div class="form-control">
+          <label for="post-content">Username:</label>
+          <input type="text" name="username" id="userUsername">
+        </div>
+
+        <div class="form-control">
+            <label for="post-content">email:</label>
+            <input type="text" name="email" id="userEmail">
+        </div>
+
+        <div class="form-control">
+            <label for="post-content">adress:</label>
+            <br>
+            <label for="Street">Street:</label>
+            <input type="text" name="street" id="userAdressStreet">
+            <br>
+            <label for="suite">suite:</label>
+            <input type="text" name="suite" id="userAdressSuite">
+            <br>
+            <label for="city">City:</label>
+            <input type="text" name="city" id="userAdressCity">
+            <br>
+            <label for="stree">zipcode:</label>
+            <input type="text" name="zipcode" id="userAdressZipCode">
+        </div>
+
+        <div class="form-control">
+            <label for="post-content">Phone:</label>
+            <input type="number" name="phone" id="userPhone">
+        </div>
+        <div class="form-control">
+            <label for="post-content">website:</label>
+            <input type="text" name="website" id="userWebsite">
+        </div>
+    
+        <input type="submit" value="Create user">
+      </form>
+</body>
+</html>
